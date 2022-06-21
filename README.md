@@ -30,4 +30,23 @@ And inside this `LibrariesForLibs.java` you see the problematic path in the java
         public Provider<MinimalExternalModuleDependency> getAssertj() { return create("assertj"); }
 ```
 
-`extra/userLib/settings.gradle` on my linux machine is turned to `extra\userLib\settings.gradle` on windows.
+`extra/userLib/settings.gradle` on my linux machine is turned to `extra\userLib\settings.gradle` on windows. As explained in the original issue `\u` is problematic.
+
+In the GitHub action run `build-on-Windows` the error can be seen (🔴 build):
+
+```
+FAILURE: Build failed with an exception.
+* What went wrong:
+org.gradle.api.internal.catalog.GeneratedClassCompilationException: Unable to compile generated sources:
+  - File LibrariesForLibs.java, line: 34, illegal unicode escape
+  - File LibrariesForLibs.java, line: 64, illegal unicode escape
+  - File LibrariesForLibs.java, line: 70, illegal unicode escape
+  - File LibrariesForLibs.java, line: 84, illegal unicode escape
+> Unable to compile generated sources:
+    - File LibrariesForLibs.java, line: 34, illegal unicode escape
+    - File LibrariesForLibs.java, line: 64, illegal unicode escape
+    - File LibrariesForLibs.java, line: 70, illegal unicode escape
+    - File LibrariesForLibs.java, line: 84, illegal unicode escape
+```
+
+The other build step using linux is working well (🟢 build)
