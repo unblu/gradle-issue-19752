@@ -1,14 +1,3 @@
-rootProject.name = 'gradle-issue-19752'
+rootProject.name = 'folder'
 
-enableFeaturePreview('VERSION_CATALOGS')
-dependencyResolutionManagement {
-    versionCatalogs {
-        libs {
-            version('unit', '5.7.1')
-            alias('unit.api').to('org.junit.jupiter', 'junit-jupiter-api').versionRef('unit')
-            alias('unit.engine').to('org.junit.jupiter', 'junit-jupiter-engine').versionRef('unit')
-
-            alias('assertj').to('org.assertj', 'assertj-core').version('3.11.1')
-        }
-    }
-}
+includeBuild 'extra/userLib'

@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation libs.unit.api
+    testImplementation libs.assertj
+
+    testRuntimeOnly libs.unit.engine
+}
+
+test {
+    useJUnitPlatform()
+}
